@@ -1,5 +1,5 @@
 # Pathfinding-Visualizer
-
+![Build and Deploy](https://github.com/RayonDev/Pathfinding-Visualizer/workflows/Build%20and%20Deploy/badge.svg?branch=master)
 > *Auto generated .README by React down below.*
 
 # Getting Started with Create React App
