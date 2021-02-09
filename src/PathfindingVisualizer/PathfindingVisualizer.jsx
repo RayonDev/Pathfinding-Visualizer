@@ -6,59 +6,36 @@ export default class PathfindingVisualizer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            grid: []
+          nodes: []
         };
     }
 
+    // Funzione che viene chiamata all'inizializzazione del component
     componentDidMount() {
-        const grid = getInitialGrid();
-        this.setState({grid});
+      const nodes = [];
+      for(let righe = 0; righe < 15; righe++) {
+        const rigaCorrente = [];
+        for(let colonne = 0; colonne < 50; colonne++) {
+          // Creo una matrice
+          rigaCorrente.push([]);
+        }
+        nodes.push(rigaCorrente);
+      }
+      this.setState({nodes});
     }
 
     render() {
-        return (
-            <>
-              <button onClick={() => this.visualizeDijkstra()}>
-                Visualize Dijkstra's Algorithm
-              </button>
-              <div className="grid">
-                {grid.map((row, rowIdx) => {
-                  return (
-                    <div key={rowIdx}>
-                      {row.map((node, nodeIdx) => {
-                        const {row, col, isFinish, isStart, isWall} = node;
-                        return (
-                          <Node
-                            key={nodeIdx}
-                            col={col}
-                            row={row}></Node>
-                        );
-                      })}
-                    </div>
-                  );
-                })}
+      const {nodes} = this.state;
+
+      return(
+        <div className="griglia">
+          {nodes.map((riga, rigaIndex) => {
+            return <div>
+              {riga.map((nodo, nodoIndice) => <Node></Node>)}
               </div>
-            </>
-          );   
+          })}
+        </div>
+      )
+        
     }
 }
-
-const getInitialGrid = () => {
-    const grid = [];
-    for (let row = 0; row < 20; row++) {
-      const currentRow = [];
-      for (let col = 0; col < 50; col++) {
-        currentRow.push(createNode(col, row));
-      }
-      grid.push(currentRow);
-    }
-    return grid;
-};
-
-const createNode = (col, row) => {
-    return {
-        col,
-        row,
-        previousNode: null,
-    };
-};
